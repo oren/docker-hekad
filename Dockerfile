@@ -11,7 +11,7 @@ RUN apt-get update &&\
 
 ENV VERSION 0.7.0
 
-RUN wget -O /tmp/heka_amd64.deb https://github.com/mozilla-services/heka/releases/download/v${VERSION}/heka_${VERSION}_amd64.deb &&\
+RUN wget -nv -O /tmp/heka_amd64.deb https://github.com/mozilla-services/heka/releases/download/v${VERSION}/heka_${VERSION}_amd64.deb &&\
         dpkg -i /tmp/heka_amd64.deb &&\
         rm /tmp/heka_amd64.deb
 
