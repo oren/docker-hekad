@@ -9,7 +9,7 @@ RUN apt-get update &&\
         chown heka:heka /var/cache/hekad
 
 
-ENV VERSION 0.8.0
+ENV VERSION 0.8.1
 
 RUN wget -nv -O /tmp/heka_amd64.deb https://github.com/mozilla-services/heka/releases/download/v${VERSION}/heka_${VERSION}_amd64.deb &&\
         dpkg -i /tmp/heka_amd64.deb &&\
