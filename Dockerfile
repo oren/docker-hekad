@@ -1,11 +1,10 @@
 FROM debian:8
 MAINTAINER Frank Rosquin <frank.rosquin@gmail.com>
 
-ENV VERSION 0.8.1
+ENV VERSION 0.8.3
 
 RUN apt-get update &&\
         apt-get -y -q install wget &&\
-        apt-get -y -q install libgeoip1 &&\
         useradd -d / -M -U -c "hekad user" -s /usr/sbin/nologin heka &&\
         mkdir /etc/hekad &&\
         mkdir /var/cache/hekad &&\
