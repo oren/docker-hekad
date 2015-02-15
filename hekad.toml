@@ -24,32 +24,13 @@ encoder = "AlertEncoder"
 type = "SandboxEncoder"
 filename = "lua_encoders/alert.lua"
 
-# Nginx access log reader
-# [AcmeWebserver]
-# type = "LogstreamerInput"
-# log_directory = "/var/log/nginx"
-# file_match = 'access\.log'
-# decoder = "CombinedNginxDecoder"
-# 
-# # Nginx access 'combined' log parser
-# [CombinedNginxDecoder]
-# type = "SandboxDecoder"
-# filename = "lua_decoders/nginx_access.lua"
-# 
-#     [CombinedNginxDecoder.config]
-#     user_agent_transform = true
-#     user_agent_conditional = true
-#     type = "combined"
-#     log_format = '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
+[LogstreamerInput]
+log_directory = "/var/log"
+file_match = 'syslog'
 
-# Collection and visualization of the HTTP status codes
-[AcmeHTTPStatus]
-type = "SandboxFilter"
-filename = "lua_filters/http_status.lua"
-ticker_interval = 60
-preserve_data = true
-message_matcher = "Logger == 'AcmeWebserver'"
+[PayloadEncoder]
+append_newlines = false
 
-    # rate of change anomaly detection on column 1 (HTTP 200)
-    [AcmeHTTPStatus.config]
-    anomaly_config = 'roc("HTTP Status", 1, 15, 0, 1.5, true, false)'
+[LogOutput]
+message_matcher = "TRUE"
+encoder = "PayloadEncoder"

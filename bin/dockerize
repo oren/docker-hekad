@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker build -t heka .
+docker run -d -v /tmp/docker-hekad/hekad.toml:/etc/hekad/hekad.toml -p 4352:4352 heka
+
