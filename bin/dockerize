@@ -1,5 +1,52 @@
 #!/bin/bash
 
-docker build -t heka .
-docker run -d -v /tmp/docker-hekad/hekad.toml:/etc/hekad/hekad.toml -p 4352:4352 heka
+# Build heka image and run the containers in the background
 
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+# Reset all variables that might be set
+file=
+verbose=0
+
+show_help () {
+  echo Build heka image and run the containers in the background
+}
+
+while [ "$#" -gt 0 ]; do
+    case $1 in
+        -h|-\?|--help)   # Call a "show_help" function to display a synopsis, then exit.
+            show_help
+            exit
+            ;;
+        -v|--verbose)
+            verbose=$((verbose + 1)) # Each -v argument adds 1 to verbosity.
+            ;;
+        --)              # End of all options.
+            shift
+            break
+            ;;
+        -?*)
+            printf 'WARN: Unknown option (ignored): %s\n' "$1" >&2
+            ;;
+        *)               # Default case: If no more options then break out of the loop.
+            break
+    esac
+
+    shift
+done
+
+# Rest of the program here.
+# If there are input files (for example) that follow the options, they
+# will remain in the "$@" positional parameters.
+
+if [ "$verbose" == 1 ]; then
+  echo verbose
+else
+  echo 
+fi
+
+docker build -t heka .
+docker run -d --name heka -v /tmp/docker-hekad/hekad.toml:/etc/hekad/hekad.toml -p 4352:4352 heka
+echo "${green}Heka is running in the background. http://localhost:4352${reset}"
