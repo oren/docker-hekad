@@ -1,4 +1,4 @@
-# Hekad Dockerfile
+# Heka, Elastic Search, InfluxDB and Grafana
 
 This will deploy a fully functional [hekad](http://hekad.readthedocs.org/) server in docker
 
@@ -8,9 +8,12 @@ Available on [Docker Hub](https://registry.hub.docker.com/u/frosquin/hekad).
 
     git clone git clone git@github.com:cnf/docker-hekad.git
     cd docker-hekad
-    docker build -t heka .
-    docker run -d -v /tmp/docker-hekad/hekad.toml:/etc/hekad/hekad.toml -p 4352:4352 heka
-    open http://localhost:4352 to view heka's web interface
+    bin/dockrize
+
+open http://localhost:4352 to view heka's web interface  
+open http://localhost:9292 to view Elastic Search's web interface  
+open http://localhost:8090 to view InfluxDB's web interface  
+open http://localhost to view Grafana's web interface  
 
 ## Misc
 

@@ -53,7 +53,7 @@ echo "${green}Elastic Search is running in the background. port 9200${reset}"
 docker run -d -p 8083:8083 -p 8086:8086 --expose 8090 --expose 8099 -e PRE_CREATE_DB="db1;db2;db3" tutum/influxdb
 echo "${green}InfluxDB is running in the background. ports 8083 and 8086${reset}"
 
-docker run -d -p 80:80 -e INFLUXDB_HOST=127.0.0.1 -e INFLUXDB_PORT=8086 -e INFLUXDB_NAME=db1 -e INFLUXDB_USER=root -e INFLUXDB_PASS=root  -e ELASTICSEARCH_HOST=127.0.0.1 -e ELASTICSEARCH_PORT=9200 -e ELASTICSEARCH_USER=admin -e ELASTICSEARCH_PASS=admin tutum/grafana
+docker run -d -p 80:80 -e INFLUXDB_HOST=127.0.0.1 -e INFLUXDB_PORT=8086 -e INFLUXDB_NAME=db1 -e INFLUXDB_USER=root -e INFLUXDB_PASS=root  -e ELASTICSEARCH_HOST=127.0.0.1 -e ELASTICSEARCH_PORT=9200 -e ELASTICSEARCH_USER=**None** -e ELASTICSEARCH_PASS=**None** tutum/grafana
 echo "${green}Grafana is running in the background. port 80${reset}"
 
 docker build -t heka .

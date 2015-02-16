@@ -35,11 +35,14 @@ append_newlines = false
 message_matcher = "TRUE"
 encoder = "PayloadEncoder"
 
+[ESJsonEncoder]
+index = "%{Type}-%{2006.01.02}"
+es_index_from_timestamp = true
+type_name = "%{Type}"
+
 [ElasticSearchOutput]
-message_matcher = "Type == 'sync.log'"
-server = "http://es-server:9200"
+message_matcher = "TRUE"
+server = "http://localhost:9200"
 flush_interval = 5000
 flush_count = 10
 encoder = "ESJsonEncoder"
-user = admin
-password = admin
