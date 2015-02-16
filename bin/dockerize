@@ -47,6 +47,16 @@ else
   echo 
 fi
 
+docker run -d -p 9200:9200 -p 9300:9300 dockerfile/elasticsearch
+echo "${green}Elastic Search is running in the background. port 9200${reset}"
+
+docker run -d -p 8083:8083 -p 8086:8086 --expose 8090 --expose 8099 -e PRE_CREATE_DB="db1;db2;db3" tutum/influxdb
+echo "${green}InfluxDB is running in the background. ports 8083 and 8086${reset}"
+
+docker run -d -p 80:80 -e INFLUXDB_HOST=127.0.0.1 -e INFLUXDB_PORT=8086 -e INFLUXDB_NAME=db1 -e INFLUXDB_USER=root -e INFLUXDB_PASS=root  -e ELASTICSEARCH_HOST=127.0.0.1 -e ELASTICSEARCH_PORT=9200 -e ELASTICSEARCH_USER=admin -e ELASTICSEARCH_PASS=admin tutum/grafana
+echo "${green}Grafana is running in the background. port 80${reset}"
+
 docker build -t heka .
-docker run -d --name heka -v $(pwd)/hekad.toml:/etc/hekad/hekad.toml -p 3000:4352 heka
-echo "${green}Heka is running in the background. http://localhost:4352${reset}"
+docker run -d --name heka -v $(pwd)/hekad.toml:/etc/hekad/hekad.toml -p 4352:4352 heka
+echo "${green}Heka is running in the background. port 4352${reset}"
+
