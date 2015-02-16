@@ -34,3 +34,10 @@ append_newlines = false
 [LogOutput]
 message_matcher = "TRUE"
 encoder = "PayloadEncoder"
+
+[ElasticSearchOutput]
+message_matcher = "Type == 'sync.log'"
+server = "http://es-server:9200"
+flush_interval = 5000
+flush_count = 10
+encoder = "ESJsonEncoder"
