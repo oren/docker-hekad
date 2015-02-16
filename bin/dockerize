@@ -48,5 +48,5 @@ else
 fi
 
 docker build -t heka .
-docker run -d --name heka -v $(pwd)/hekad.toml:/etc/hekad/hekad.toml -p 4352:4352 heka
+docker run -d --name heka -v $(pwd)/hekad.toml:/etc/hekad/hekad.toml -p 3000:4352 heka
 echo "${green}Heka is running in the background. http://localhost:4352${reset}"
